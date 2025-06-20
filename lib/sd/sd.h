@@ -14,6 +14,8 @@ public:
     void init();
     void up();
     void down();
+    String getPayload(String payloadName);
+    void copy();
 };
 
 extern SDCARD sd;

@@ -9,7 +9,7 @@ void setup() {
   sd.init();
   key.up();
   delay(5000);
-  // key.pullScript();
+  key.pullScript();
 }
 
 void loop() {

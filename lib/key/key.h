@@ -11,6 +11,7 @@ public:
     void up();
     void openPS();
     void pullScript();
+    void runPayload(String);
 };
 
 extern KEYBOARD key;

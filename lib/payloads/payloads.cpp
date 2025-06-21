@@ -1,4 +1,5 @@
 #include <payloads.h>
+#include <key.h>
 
 PAYLOADS::PAYLOADS() {}
 
@@ -35,9 +36,12 @@ void PAYLOADS::usePayload(String targetPayload) {
             Serial.println("Response Error");
             break;
         case PAYLOAD_UNKNOWN:
-            Serial.print("Payload Request Unknown: ");
-            Serial.println(targetPayload);
-            break;
+            Serial.println("Payload Request Not Predetermined");
+            Serial.println("Running as Keyboard Payload");
+            key.runPayload(targetPayload);
+            // Serial.print("Payload Request Unknown: "); // SHOULD THIS GO TO KEY.RUNSCRIPT????? IS THERE ENOUGH ERROR HANDLUING???
+            // Serial.println(targetPayload);
+            // break;
     }
 }
 

@@ -6,4 +6,5 @@ When the "A" button is pressed on the FoxFeather. It will make the Arduino Due c
 If found it will check whether it is a known command and therefore run a pre-determined sequence of events.
 If the command is not "pre-determined" it will attempt to use keyboard commands to open admin powershell through usb connection.
 Then input whatever was in the payload.
+
 When the "B" button is pressed on the FoxFeather. It will attempt to open admin powershell, and call a powershell script (dummyPayload.ps1) from this repo.

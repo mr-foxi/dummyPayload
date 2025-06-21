@@ -26,50 +26,20 @@ void SDCARD::down() {
 }
 
 String SDCARD::getPayload(String payloadName) {
+    sd.down();
+    sd.init();
     String payload;
     File payloadFile = SD.open(payloadName);
     if (!payloadFile) {
         Serial.println("Failed to open source file!");
-        return "";
+        return "!ERROR 333: Payload Retrieval!";
     }
     while (payloadFile.available()) {
         payload += (char)payloadFile.read();
     }
     payloadFile.close();
+    delay(50);
     return payload;
-}
-
-void SDCARD::copy() {
-    // Open the original file
-    File sourceFile = SD.open("source.bin");
-    if (!sourceFile) {
-        Serial.println("Failed to open source file!");
-        return;
-    }
-
-    // Create a new file on the same SD for the copy
-    File destFile = SD.open("copy.bin", FILE_WRITE);
-    if (!destFile) {
-        Serial.println("Failed to create destination file!");
-        sourceFile.close();
-        return;
-    }
-
-    // Copy the file content
-    // Use a buffer (array) to read and write chunks of data
-    const int BUFFER_SIZE = 512; // A common and efficient buffer size for SD card operations
-    uint8_t buffer[BUFFER_SIZE];
-    int bytesRead;
-
-    while ((bytesRead = sourceFile.read(buffer, sizeof(buffer))) > 0) {
-        destFile.write(buffer, bytesRead);
-    }
-
-    // Close both files
-    sourceFile.close();
-    destFile.close();
-
-    Serial.println("File copied successfully!");
 }
 
 SDCARD sd = SDCARD();

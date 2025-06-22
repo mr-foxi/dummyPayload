@@ -2,13 +2,13 @@
 // #include <oled.h>
 #include <WiFi.h>
 #include <serials.h>
+#include <payloadsList.h>
 /* !#!# DANGER !#!# DANGER !#!# DANGER !#!# */
 #include <pass.h>
 /* !#!# DANGER !#!# DANGER !#!# DANGER !#!# */
 
-
+WiFiServer server(ESP_PORT); // USING TCP ON PORT 7408
 WIFI::WIFI() {}
-// wifiHTTP::wifiHTTP() {}
 
 void WIFI::up() {
     WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
@@ -66,12 +66,11 @@ void WIFI::httpRequest() {
     }
     http.end();
 }
-WiFiServer server(7408); // USING TCP ON PORT 7408
-void WIFI::apStart() {
-    // Serial.begin(115200);
 
+void WIFI::apStart() {
+    WiFi.softAPConfig(ESP_IP, ESP_IP, ESP_SUBNET);
     // Start Wi-Fi in AP mode
-    WiFi.softAP("esp-ap", "TestPass42");
+    WiFi.softAP(ESP_SSID, ESP_PASS);
     Serial.println("Access Point Started");
     Serial.println(WiFi.softAPIP()); // Should print 192.168.4.1
 
@@ -96,68 +95,5 @@ String WIFI::apRecieve() {
     }
     return msg;
 }
-wifiPayload checkPayload(String response) {
-  response.trim();
-  if (response == "") return PAYLOAD_EMPTY;
-  if (response == "Error") return PAYLOAD_ERROR;
-  if (response == "!ERROR: 404!") return PAYLOAD_ERROR404;
-//   if (response == "!ERROR: 222!") return RESPONSE_ERROR222; GOOD DEBUG LINE
-  if (response == "#Roger Roger#") return PAYLOAD_ROGER;
-  if (response == "$Test Payload$") return PAYLOAD_TEST;
-  if (response == "$PAYLOAD - SDCARD$") return PAYLOAD_SDCARD;
-  if (response == "$PAYLOAD - PULLSCRIPT$") return PAYLOAD_PULLSCRIPT;
-  if (response == "$PAYLOAD - PULLSCRIPTEXIT$") return PAYLOAD_PULLSCRIPTEXIT;
-  return PAYLOAD_UNKNOWN;
-}
 
-void WIFI::handlePayload(String response) {
-    switch(checkPayload(response)) {
-        case PAYLOAD_EMPTY:
-            // Serial.println("No Response Yet..."); GOOD DEBUG LINE
-            break;
-        case PAYLOAD_ERROR:
-            Serial.println("Response Error");
-            break;
-        case PAYLOAD_ERROR404:
-            Serial.println("!Error: 404! - Error Not Found");
-            break;
-        // case RESPONSE_ERROR222:
-        //     Serial.println("!Error: 222! - Serial Pin Not Available"); GOOD DEBUG LINE
-        //     break;
-        case PAYLOAD_ROGER:
-            Serial.println("Roger Roger!");
-            // oled.clear();
-            // oled.printlnString("Roger Roger!");
-            delay(3000);
-            // oled.clear();
-            // oled.printlnString("!!  FoxDev BADUSB  !!");
-            break;
-        case PAYLOAD_TEST:
-            // oled.printString("Test Payload");
-            Serial.print("Test Payload Activated");
-            serials.sdPayload();
-            break;
-        case PAYLOAD_SDCARD:
-            // oled.printString("Test Payload");
-            Serial.print("SD Payload Activated");
-            serials.sdPayload();
-            break;
-        case PAYLOAD_PULLSCRIPT:
-            // oled.printString("Test Payload");
-            Serial.print("Pull Script Payload Activated");
-            serials.pullScript();
-            break;
-        case PAYLOAD_PULLSCRIPTEXIT:
-            // oled.printString("Test Payload");
-            Serial.print("Pull Script Exit Payload Activated");
-            serials.pullScriptExit();
-            break;
-        case PAYLOAD_UNKNOWN:
-            Serial.print("Unknown Response: ");
-            Serial.println(response);
-            break;
-
-    }
-}
 WIFI wifi = WIFI();
-// wifiHTTP http = wifiHTTP();

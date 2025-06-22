@@ -10,20 +10,21 @@ void KEYBOARD::up() {
 
 void KEYBOARD::openPS() {
     Keyboard.press(KEY_LEFT_GUI);
-    Keyboard.press('x');
     delay(25);
+    Keyboard.press('x');
+    delay(50);
     Keyboard.releaseAll();
     delay(500);
     Keyboard.press('a');
     delay(50);
     Keyboard.release('a');
-    delay(750);
+    delay(500);
     Keyboard.press(KEY_LEFT_ALT);
     delay(25);
     Keyboard.press('y');
     delay(150);
     Keyboard.releaseAll();
-    delay(750);
+    delay(500);
 }
 
 void KEYBOARD::pullScript() {

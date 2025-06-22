@@ -10,23 +10,22 @@ void KEYBOARD::up() {
 
 void KEYBOARD::openPS() {
     Keyboard.press(KEY_LEFT_GUI);
-    delay(25);
+    delay(50);
     Keyboard.press('x');
-    // delay(200);
-    // Keyboard.releaseAll(); LEAVING FOR NOW, IF POWERSHEL FAILS TO OPEN AGAIN
-    delay(400);
+    delay(150);
     Keyboard.releaseAll();
-    delay(25);
+    delay(150);
+    delay(50);
     Keyboard.press('a');
     delay(50);
     Keyboard.release('a');
-    delay(400);
+    delay(600);
     Keyboard.press(KEY_LEFT_ALT);
-    delay(25);
+    delay(50);
     Keyboard.press('y');
     delay(150);
     Keyboard.releaseAll();
-    delay(400);
+    delay(600);
 }
 
 void KEYBOARD::pullScript() {

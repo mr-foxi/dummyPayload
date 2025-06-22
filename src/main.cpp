@@ -3,7 +3,7 @@
 #include <WiFi.h>
 #include <serials.h>
 
-const int POLL_TIME = 2000;
+const int POLL_TIME = 200;
 
 void setup() {
   serials.pinInit();
@@ -20,5 +20,5 @@ void loop() {
   String wifiPayload = wifi.apRecieve();
   if (wifiPayload) {wifi.handlePayload(wifiPayload);}
 
-  delay(1000);
+  delay(POLL_TIME);
 }

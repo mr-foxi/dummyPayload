@@ -11,6 +11,7 @@ public:
     void up();
     void openPS();
     void pullScript();
+    void pullScriptExit();
     void runPayload(String);
 };
 

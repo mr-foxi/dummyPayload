@@ -38,6 +38,7 @@ ResponseCode parseResponse(String response) {
 //   if (response == "sdPayload") return RESPONSE_SDPAYLOAD;
   if (response == "payload") return RESPONSE_SDPAYLOAD;
   if (response == "pullScript") return RESPONSE_PULLSCRIPT;
+  if (response == "$PAYLOAD - PULLSCRIPTEXIT$") return RESPONSE_PULLSCRIPTEXIT;
   if (response == "!ERROR!") return RESPONSE_ERROR;
   if (response == "!ERROR: 404!") return RESPONSE_ERROR404;
 //   if (response == "!ERROR: 222!") return RESPONSE_ERROR222; GOOD DEBUG LINE
@@ -71,6 +72,13 @@ void SERIALS::checkResponse(String response) {
             Serial.print("Roger Roger: ");
             Serial.println(response);
             key.pullScript();
+            Serial1.println("#Roger Roger#");
+            break;
+        case RESPONSE_PULLSCRIPTEXIT:
+            Serial.println();
+            Serial.print("Roger Roger: ");
+            Serial.println(response);
+            key.pullScriptExit();
             Serial1.println("#Roger Roger#");
             break;
         case RESPONSE_UNKNOWN:

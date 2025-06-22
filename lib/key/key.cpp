@@ -15,6 +15,7 @@ void KEYBOARD::openPS() {
     delay(50);
     Keyboard.releaseAll();
     delay(500);
+    Keyboard.releaseAll();
     Keyboard.press('a');
     delay(50);
     Keyboard.release('a');
